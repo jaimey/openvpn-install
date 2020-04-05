@@ -812,7 +812,7 @@ ifconfig-pool-persist ipp.txt" >> /etc/openvpn/server.conf
 		fi
 		;;
 	esac
-	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
+	echo ';push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
 
 	# IPv6 network settings if needed
 	if [[ "$IPV6_SUPPORT" = 'y' ]]; then
@@ -836,10 +836,10 @@ push "redirect-gateway ipv6"' >> /etc/openvpn/server.conf
 
 	case $TLS_SIG in
 		1)
-			echo "tls-crypt tls-crypt.key 0" >> /etc/openvpn/server.conf
+			echo ";tls-crypt tls-crypt.key 0" >> /etc/openvpn/server.conf
 		;;
 		2)
-			echo "tls-auth tls-auth.key 0" >> /etc/openvpn/server.conf
+			echo ";tls-auth tls-auth.key 0" >> /etc/openvpn/server.conf
 		;;
 	esac
 
@@ -854,6 +854,7 @@ tls-server
 tls-version-min 1.2
 tls-cipher $CC_CIPHER
 status /var/log/openvpn/status.log
+log /var/log/openvpn/log.log
 verb 3" >> /etc/openvpn/server.conf
 
 	# Create log dir
